@@ -64,6 +64,10 @@ module.exports = {
 			passport.authenticate('discord', { failureRedirect: '/' }), function (req, res) { res.redirect('/dashboard') } // auth success
 		);
 
+		api.use((req, res) => {
+			res.redirect("/dashboard");
+		});
+
 		api.listen(process.env.port, () => {
 			console.log("Listening to port: " + process.env.port);
 		});
