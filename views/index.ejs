@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <title>Home</title>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+      <!--     Fonts and icons     -->
+      <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <!-- Material Kit CSS -->
+   </head>
+   <body>
+      <div class="wrapper ">
+         <div class="sidebar" data-color="purple" data-background-color="white">
+            <!--
+               Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+               
+               Tip 2: you can also add an image using data-image tag
+               -->
+            <div class="logo">
+               <a class="simple-text logo-normal">
+               <%= bot.user.username %>
+               </a>
+            </div>
+            <div class="sidebar-wrapper">
+               <ul class="nav">
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://jetbot-dash.aditya1010.repl.co/">
+                        <i class="material-icons">dashboard</i>
+                        <p>Dashboard</p>
+                     </a>
+                  </li>
+                  <li class="nav-item active  ">
+                     <a class="nav-link" href="https://jetbot-dash.aditya1010.repl.co/home">
+                        <i class="material-icons">home</i>
+                        <p>Home</p>
+                     </a>
+                  </li>
+                  <!-- your sidebar here -->
+               </ul>
+            </div>
+         </div>
+         <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+               <div class="container-fluid">
+                  <div class="navbar-wrapper">
+                     <a class="navbar-brand" href="https://jetbot-dash.aditya1010.repl.co/home" target="blank">Home</a>
+                  </div>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="navbar-toggler-icon icon-bar"></span>
+                  <span class="navbar-toggler-icon icon-bar"></span>
+                  <span class="navbar-toggler-icon icon-bar"></span>
+                  </button>
+                  <div class="collapse navbar-collapse justify-content-end">
+                     <ul class="navbar-nav">
+                        <!-- your navbar here -->
+                     </ul>
+                  </div>
+               </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content">
+               <div class="container-fluid">
+                  <h1 class="text-center">
+                     <pre>
+			   
+			   
+<%= bot.user.username %></pre>
+                  </h1>
+                  <h3 class="text-center">A simple Discord bot to fill all your needs</h3>
+                  <div class="text-center">
+                     <button type="button" class="btn btn-primary m-4" onclick="window.location.href='https://discord.com/api/oauth2/authorize?client_id=883608595835523072&permissions=0&redirect_uri=https%3A%2F%2Fwww.dash-systemx.cf%2Fcallback&scope=bot%20applications.commands'">Invite Me</button>
+                  </div>
+               </div>
+            </div>
+            <pre>
+
+         <hr>
+         </hr>
+		 </pre>
+            <h1 class="text-center m-8">
+               <pre>
+		  
+Commands
+
+		 </pre>
+            </h1>
+            <table class="table text-center">
+               <thead class="thead-dark">
+                  <tr>
+                     <th scope="col">Name</th>
+                     <th scope="col">Description</th>
+                     <th scope="col">Aliases</th>
+                     <th scope="col">Cooldown</th>
+                  </tr>
+               </thead>
+               <% bot.commands.map(cmd => { %>
+               <tbody>
+                  <tr>
+                     <td><%= cmd.name %></td>
+                     <td><%= cmd.description || "No Description!" %></td>
+                     <td><%= cmd.aliases.join(", ") || "No Command Aliases!" %></td>
+                     <td><%= cmd.timeout + " seconds" || "No Command Cooldown!" %></td>
+                  </tr>
+               </tbody>
+               <% }) %>
+            </table>
+         </div>
+      </div>
+   </body>
+   <%- include("./assets/css.ejs") %>
+</html>
