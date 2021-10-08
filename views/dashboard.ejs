@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <title>Dashboard</title>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+      <!--     Fonts and icons     -->
+      <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <!-- Material Kit CSS -->
+   </head>
+   <body>
+      <div class="wrapper ">
+      <div class="sidebar" data-color="purple" data-background-color="white">
+         <!--
+            Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+            
+            Tip 2: you can also add an image using data-image tag
+            -->
+         <div class="logo">
+            <a class="simple-text logo-normal">
+            <%= user.username.toLowerCase() %>
+            </a>
+         </div>
+         <div class="sidebar-wrapper">
+            <ul class="nav">
+               <li class="nav-item active">
+                  <a class="nav-link" href="https://jetbot-dash.aditya1010.repl.co/">
+                     <i class="material-icons">dashboard</i>
+                     <p>Dashboard</p>
+                  </a>
+               </li>
+			   <li class="nav-item">
+                  <a class="nav-link" href="https://jetbot-dash.aditya1010.repl.co/logout">
+                     <i class="material-icons">logout</i>
+                     <p>Logout</p>
+                  </a>
+               </li>
+               <!-- your sidebar here -->
+            </ul>
+         </div>
+      </div>
+      <div class="main-panel">
+         <!-- Navbar -->
+         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+            <div class="container-fluid">
+               <div class="navbar-wrapper">
+                  <a class="navbar-brand" href="https://jetbot-dash.aditya1010.repl.co/home" target="_blank">◀️</a>
+			   </div>
+               <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="navbar-toggler-icon icon-bar"></span>
+               <span class="navbar-toggler-icon icon-bar"></span>
+               <span class="navbar-toggler-icon icon-bar"></span>
+               </button>
+               <div class="collapse navbar-collapse justify-content-end">
+                  <ul class="navbar-nav">
+                     <!-- your navbar here -->
+                  </ul>
+               </div>
+            </div>
+         </nav>
+         <!-- End Navbar -->
+         <div class="content">
+            <div class="container-fluid">
+               <div class="container text-center">
+                  <div class="row">
+                     <div class="col-lg-6 mb-4">
+                        <% const guilds = user.guilds.filter(g => { %> 
+                        <% const perms = new permissions(g.permissions_new).has("MANAGE_GUILD") %>
+                        <% if(perms) { %>
+                        <div class="card">
+                           <div class="card-body">
+                              <h5 class="card-title"><%= g.name %></h5>
+                              <% if(bot.guilds.cache.get(g.id)) { %>
+                              <p class="card-text">
+                                 Change the bot's prefixes, config settings through our powerful dashboard!
+                              </p>
+                              <a href="#" class="btn btn-primary">
+                              Manage Guild
+                              </a>
+                              <% } else { %>
+							  <% const invitelink = `https://discord.com/api/oauth2/authorize?client_id=883608595835523072&permissions=0&scope=bot%20applications.commands&&guild_id=${g.id}` %>
+                              <p class="card-text">
+                                 Invite the bot to the server to Manage it!
+                              </p>
+                              <a href=<%= invitelink %> class="btn btn-primary">
+                              Invite the bot!
+                              </a>
+                              <% } %>
+                           </div>
+                        </div>
+                        <% } %>
+                        <% }) %>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+   <%- include("./assets/css.ejs") %>
+</html>
