@@ -19,11 +19,11 @@ module.exports = async(client, interaction) => {
       interaction.user.id
     );
 
-    cmd.run(client, interaction, args);
+    cmd.exec(client, interaction, args);
   }
   if (interaction.isContextMenu()) {
     await interaction.deferReply({ ephemeral: false });
     const command = client.slashcommands.get(interaction.commandName);
-    if (command) command.run(client, interaction);
+    if (command) command.exec(client, interaction);
   }
 };
